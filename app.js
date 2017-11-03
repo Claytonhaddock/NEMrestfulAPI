@@ -14,7 +14,7 @@ app.use(function(req, res, next){
 	next();
 });
 
-//Index Route
+//Index Routes
 app.get('/', function(req, res){
 	const title = 'Welcome, Frank';
 	res.render('Index', {
