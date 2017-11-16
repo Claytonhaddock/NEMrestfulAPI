@@ -1,4 +1,5 @@
 const express        = require('express');
+const path           = require('path');
 const exphbs         = require('express-handlebars');
 const bodyParser     = require('body-parser');
 const mongoose       = require('mongoose');
@@ -33,6 +34,7 @@ app.set('view engine', 'handlebars')
 //middleware
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(session({
 	secret: '#55',
