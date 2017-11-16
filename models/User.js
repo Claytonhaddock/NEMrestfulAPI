@@ -6,14 +6,14 @@ const UserSchema = new schema({
 		type: String,
 		required: true
 	},
-	details: {
+	email: {
 		type: String,
 		required: true
 	},
 	password: {
 		type: String,
 		required: true
-	}
+	},
 	date: {
 		type: Date,
 		default: Date.now
