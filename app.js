@@ -7,12 +7,13 @@ const methodOverride = require('method-override');
 const session        = require('express-session');
 const flash          = require('connect-flash');
 const passport       = require('passport');
+const dbURI          = require('./config/database');
 
 
 
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 //Loud routes
 const ideas = require('./routes/ideas');
@@ -24,9 +25,9 @@ require('./config/passport')(passport);
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
 // Connect to mongoose
-mongoose.connect('mongodb://localhost/vidjot', {
-	useMongoClient: true
-})
+mongoose.connect(dbURI.mongoURI, {useMongoClient: true});
+
+
 .then(()=>{ console.log('MongoDB Connected')})
 .catch(err => console.log(err))
 
