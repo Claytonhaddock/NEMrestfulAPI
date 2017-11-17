@@ -15,6 +15,14 @@
 			<label for="details">Details</label>
 			<textarea class="form-control" name="details" required>{{idea.details}}</textarea>
 		</div>
+		<div class="form-group">
+			<label for="public">Public</label>
+			{{#if idea.public}}
+				<input type="checkbox" class="form-control" name="public" checked>
+			{{else}}
+				<input type="checkbox" class="form-control" name="public">
+			{{/if}}
+		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </div>
