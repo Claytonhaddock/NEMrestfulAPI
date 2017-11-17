@@ -8,7 +8,11 @@ require('../models/idea');
 const Idea = mongoose.model('ideas');
 
 router.get('/', ensureAuthenticated, (req, res)=>{
-	Idea.find({})
+	Idea.find({ $or: [{
+		public: true
+	},{
+		user: req.user.id
+	}]})
 	.sort({data: 'desc'})
 	.then(ideas => {
 		res.render('ideas/index', {
@@ -26,9 +30,14 @@ router.get('/edit/:id',ensureAuthenticated,  function(req, res){
 	Idea.findOne({
 		_id: req.params.id
 	}).then(idea =>{
-		res.render('ideas/edit', {
-			idea: idea
-		});
+		if(idea.user != req.user.id){
+			req.flash('error_msg', 'Not Authorized');
+			res.redirect('/ideas');
+		} else {
+			res.render('ideas/edit', {
+				idea: idea
+			});
+		}
 	})
 })
 
@@ -49,9 +58,16 @@ router.post('/',ensureAuthenticated,  (req, res)=>{
 			details: req.body.details
 		})
 	} else {
+		if(req.body.public){
+			req.body.public = true;
+		} else {
+			req.body.public = false;
+		}
 		const newUser = {
 			title: req.body.title,
-			details: req.body.details
+			details: req.body.details,
+			public: req.body.public,
+			user: req.user.id
 		};
 		new Idea(newUser)
 		.save()

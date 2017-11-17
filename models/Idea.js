@@ -10,6 +10,14 @@ const IdeaSchema = new schema({
 		type: String,
 		required: true
 	},
+	user: {
+		type: String,
+		required: true,
+	},
+	public: {
+		type: Boolean,
+		required: true,
+	},
 	data: {
 		type: Date,
 		default: Date.now
