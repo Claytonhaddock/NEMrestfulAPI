@@ -83,8 +83,14 @@ router.put('/:id',ensureAuthenticated, (req, res)=>{
 	Idea.findOne({
 		_id: req.params.id
 	}).then(idea => {
+		if(req.body.public){
+			req.body.public = true;
+		} else {
+			req.body.public = false;
+		}
 		idea.title = req.body.title;
 		idea.details = req.body.details;
+		idea.public = req.body.public,
 
 		idea.save().then(idea => {
 			req.flash('success_msg', 'Video idea updated');
