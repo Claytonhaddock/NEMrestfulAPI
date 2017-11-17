@@ -3,11 +3,15 @@
 	<form action="/ideas" method="post">
 		<div class="form-group">
 			<label for="title">Title</label>
-			<input type="text" class="form-control" name="title" required="">
+			<input type="text" class="form-control" name="title" required>
 		</div>
 		<div class="form-group">
 			<label for="details">Details</label>
 			<textarea class="form-control" name="details" required></textarea>
+		</div>
+		<div class="form-group">
+			<label for="public">Public</label>
+			<input type="checkbox" class="form-control" name="public">
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
