@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const {ensureAuthenticated} = require('../helpers/auth');
 
 // Load Idea Model
-require('../models/idea');
+require('../models/Idea');
 const Idea = mongoose.model('ideas');
 
 router.get('/', ensureAuthenticated, (req, res)=>{
