@@ -100,11 +100,20 @@ router.put('/:id',ensureAuthenticated, (req, res)=>{
 })
 
 router.delete('/:id', ensureAuthenticated, (req, res)=> {
-	Idea.remove({
+	Idea.findOne({
 		_id: req.params.id
-	}).then(() => {
-		req.flash('success_msg', 'Video idea deleted');
-		res.redirect('/ideas');
+	}).then(idea => {
+		if(idea.user != req.user.id){
+			req.flash('error_msg', 'Not Authorized');
+			res.redirect('/ideas');
+		} else {
+			Idea.remove({
+				_id: req.params.id
+			}).then(() => {
+				req.flash('success_msg', 'Video idea deleted');
+				res.redirect('/ideas');
+			})
+		}
 	})
 });
 

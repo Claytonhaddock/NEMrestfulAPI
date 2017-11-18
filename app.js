@@ -25,7 +25,7 @@ require('./config/passport')(passport);
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
 // Connect to mongoose
-mongoose.connect(dbURI.mongoURI, {useMongoClient: true});
+mongoose.connect(dbURI.mongoURI, {useMongoClient: true})
 
 
 .then(()=>{ console.log('MongoDB Connected')})
